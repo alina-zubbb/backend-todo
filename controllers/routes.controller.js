@@ -10,9 +10,10 @@ import { createTodo, updateTodo, deleteTodo, getAllTodo } from "./todos";
 
 const publicRouter = () => {
   const router = Router();
+  // auth
   router.post("/signup", userSignupControler);
   router.post("/login", userLoginControler);
-  router.post("/updateTodo", updateTodo);
+  // todos
   return router.routes();
 };
 
@@ -24,6 +25,7 @@ const privateRouter = () => {
   // todos
   router.get("/getAllTodo", getAllTodo);
   router.post("/createTodo", createTodo);
+  router.post("/updateTodo", updateTodo);
   router.post("/deleteTodo", deleteTodo);
 
   return router.routes();

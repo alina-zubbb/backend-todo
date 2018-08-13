@@ -2,7 +2,9 @@ import db from "../../models";
 
 const getAllTodo = async ctx => {
   try {
-    let todos = await db.Todo.find({}, function(err, todos) {});
+    let todos = await db.Todo.find({}, function(err) {
+      console.log(err);
+    });
     ctx.status = 200;
     ctx.body = todos;
   } catch (e) {
