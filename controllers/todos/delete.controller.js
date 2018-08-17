@@ -3,8 +3,6 @@ import db from "../../models";
 const deleteTodo = async ctx => {
   const { itemId } = ctx.request.body;
 
-  console.log("========ctx.request.body", ctx.request.body);
-
   if (!itemId) {
     ctx.status = 406;
     ctx.body = {
@@ -13,6 +11,7 @@ const deleteTodo = async ctx => {
   }
 
   try {
+    console.log("itemId", itemId);
     const removed = await db.Todo.findByIdAndRemove(itemId);
     console.log("--------removed", removed);
     ctx.status = 200;

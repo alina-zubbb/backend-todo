@@ -3,6 +3,7 @@ import db from "../../models";
 
 const userSignupControler = async ctx => {
   const { username, password } = ctx.request.body;
+  console.log("ctx.request.body", ctx.request.body);
   console.log("username, password", username, password);
   if (!username || !password) {
     ctx.status = 406;

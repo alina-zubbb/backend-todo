@@ -8,6 +8,7 @@ const getAllTodo = async ctx => {
     ctx.status = 200;
     ctx.body = todos;
   } catch (e) {
+    console.log("getAllTodo", e);
     ctx.status = 401;
     ctx.body = {
       err: e

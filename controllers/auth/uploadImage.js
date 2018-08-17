@@ -8,9 +8,8 @@ const uploadImage = async ctx => {
   const name = filePath.slice(filePath.lastIndexOf("/") + 1);
 
   const link = `${ctx.request.protocol}://${ctx.request.host}/${name}`;
-  console.log("link", link);
 
-  const user = await db.User.findOneAndUpdate(userId, {
+  const user = await db.User.findByIdAndUpdate(userId, {
     $set: { imageLink: link }
   });
 
