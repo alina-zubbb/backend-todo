@@ -2,9 +2,9 @@ import db from "../../models";
 
 const updateTodo = async ctx => {
   try {
-    const { itemId, text } = ctx.request.body;
+    const { itemId, text, done } = ctx.request.body;
 
-    if (!itemId || !text) {
+    if (!itemId || !text || !done) {
       ctx.status = 406;
       ctx.body = {
         res: "ERRor"
@@ -12,7 +12,7 @@ const updateTodo = async ctx => {
     }
 
     await db.Todo.findByIdAndUpdate(itemId, {
-      $set: { text }
+      $set: { text, done }
     });
 
     const updated = await db.Todo.findById(itemId);

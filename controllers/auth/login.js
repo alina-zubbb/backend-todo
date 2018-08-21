@@ -14,7 +14,6 @@ const userLoginControler = async ctx => {
   }
   try {
     const user = await db.User.findOne({ username });
-    console.log("user", user);
     const checkPassword = await user.checkPassword(password);
     if (checkPassword) {
       ctx.status = 200;

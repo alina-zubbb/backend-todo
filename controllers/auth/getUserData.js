@@ -2,6 +2,8 @@ const getUserData = async ctx => {
   try {
     const { username, imageLink, _id } = ctx.request.user;
 
+    console.log("username 200 OK!", username);
+
     ctx.status = 200;
     ctx.body = {
       authenticated: true,

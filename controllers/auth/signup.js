@@ -30,7 +30,6 @@ const userSignupControler = async ctx => {
     };
   } catch (err) {
     ctx.status = 403;
-    const message = err.errors;
     ctx.body = {
       err: err.errors
     };
