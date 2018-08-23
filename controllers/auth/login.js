@@ -14,30 +14,34 @@ const userLoginControler = async ctx => {
   }
   try {
     const user = await db.User.findOne({ username });
-    const checkPassword = await user.checkPassword(password);
-    if (checkPassword) {
-      ctx.status = 200;
-      const token = jwt.sign({ _id: user._id }, config.secret);
-      ctx.body = {
-        authenticated: true,
-        username: user.username,
-        token,
-        id: user["_id"],
-        imageLink: user.imageLink
-      };
+    if (user) {
+      const checkPassword = await user.checkPassword(password);
+      if (checkPassword) {
+        ctx.status = 200;
+        const token = jwt.sign({ _id: user._id }, config.secret);
+        ctx.body = {
+          authenticated: true,
+          username: user.username,
+          token,
+          id: user["_id"],
+          imageLink: user.imageLink
+        };
+      } else {
+        ctx.status = 201;
+        ctx.body = {
+          authenticated: false,
+          message: "Invalid password"
+        };
+      }
     } else {
-      ctx.status = 401;
+      ctx.status = 202;
       ctx.body = {
         authenticated: false,
-        message: "Invalid password"
+        message: "Invalid user name"
       };
     }
   } catch (e) {
-    ctx.status = 401;
-    ctx.body = {
-      authenticated: false,
-      message: "Invalid user name"
-    };
+    console.log(e);
   }
 };
 
